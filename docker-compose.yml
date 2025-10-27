@@ -1,0 +1,50 @@
+services:
+  shortener_php:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: shortener_php
+    volumes:
+      - ./:/var/www
+    networks:
+      - shortener
+    depends_on:
+      - shortener_mysql
+
+  shortener_nginx:
+    image: nginx:latest
+    container_name: shortener_nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - shortener_php
+    networks:
+      - shortener
+
+  shortener_mysql:
+    image: mysql:8.0
+    container_name: shortener_mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: shortener
+      MYSQL_USER: shortener_user
+      MYSQL_PASSWORD: BioNIerICuLShOth
+      MYSQL_ROOT_PASSWORD: BioNIerICuLShOth
+    ports:
+      - "3306:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      - shortener
+
+networks:
+  shortener:
+
+volumes:
+  dbdata:
+    external: false
+  laravel_storage:
+    external: false
