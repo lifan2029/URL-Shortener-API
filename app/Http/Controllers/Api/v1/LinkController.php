@@ -34,7 +34,7 @@ class LinkController extends Controller
     public function redirectFromShortLink(string $shortCode)
     {
         return redirect(
-            $this->linkService->getOriginalUrl($shortCode)
+            $this->linkService->getOriginalUrlAndIncrement($shortCode)
         );
     }
 }

@@ -18,7 +18,7 @@ class LinkService
     public function makeShortLink(array $data): string
     {
         if ($this->linkRepository->countByIpAddressToday($data['ip_address']) >= 3) {
-            throw new TooManyRequestsHttpException('IP address has reached the daily limit for creating short links');
+            throw new TooManyRequestsHttpException(null, 'IP address has reached the daily limit for creating short links');
         }
 
         $data['short_code'] = bin2hex(random_bytes(4));
@@ -43,7 +43,7 @@ class LinkService
         ];
     }
 
-    public function getOriginalUrl(string $shortCode): Link
+    public function getOriginalUrlAndIncrement(string $shortCode): string
     {
         $link = $this->linkRepository->findByShortCode($shortCode);
 
@@ -51,6 +51,8 @@ class LinkService
             throw new NotFoundHttpException('Link not found');
         }
 
-        return $link;
+        $this->linkRepository->incrementClickCount($link);
+
+        return $link->original_url;
     }
 }
