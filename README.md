@@ -1,4 +1,4 @@
-# 🗒️ Todo List API
+# 🗒️ Url shortener
 
 A simple REST API for creating and managing **short URLs**, built with **Laravel 12 (PHP 8.2)** and **Docker**.
 This project is a **pet project** and serves as a demonstration of **Micro SaaS architecture** with online **Postman documentation**.
