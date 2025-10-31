@@ -113,12 +113,13 @@ docker compose logs -f shortener_php                                 # View cont
 
 ---
 
-## 💡 Author
+## ✨ Author
 
-**Your Name**  
+Developed by [lifan2029](https://github.com/your-username) — Fullstack developer.  
+If you like this project, feel free to ⭐ star it on GitHub!
+
 📧 lifan2029@gmail.com  
-🌐 [GitHub](https://github.com/lifan2029)
 
 ---
 
-> 🧠 This project was created for learning purposes to demonstrate Laravel API development with Docker.
+> 🧠 This project was created for demonstrate Laravel API development with Docker.
